@@ -14,32 +14,39 @@ public class MicrophoneCapture : MonoBehaviour
     //A handle to the attached AudioSource  
     private AudioSource goAudioSource;
 
-    void Start()
+    public GameObject canvasScript;
+
+    void OnTriggerEnter(Collider micCollider)
     {
-        //Check if there is at least one microphone connected  
-        if (Microphone.devices.Length <= 0)
-        {
-            //Throw a warning message at the console if there isn't  
-            Debug.LogWarning("Microphone not connected!");
-        }
-        else //At least one microphone is present  
-        {
-            //Set our flag 'micConnected' to true  
-            micConnected = true;
+        if (micCollider.CompareTag("Player"))
 
-            //Get the default microphone recording capabilities  
-            Microphone.GetDeviceCaps(null, out minFreq, out maxFreq);
-
-            //According to the documentation, if minFreq and maxFreq are zero, the microphone supports any frequency...  
-            if (minFreq == 0 && maxFreq == 0)
+        {
+            //Check if there is at least one microphone connected  
+            if (Microphone.devices.Length <= 0)
             {
-                //...meaning 44100 Hz can be used as the recording sampling rate  
-                maxFreq = 44100;
+                //Throw a warning message at the console if there isn't  
+                //Debug.LogWarning("Microphone not connected!");
             }
+            else //At least one microphone is present  
+            {
+                //Set our flag 'micConnected' to true  
+                micConnected = true;
 
-            //Get the attached AudioSource component  
-            goAudioSource = this.GetComponent<AudioSource>();
+                //Get the default microphone recording capabilities  
+                Microphone.GetDeviceCaps(null, out minFreq, out maxFreq);
+
+                //According to the documentation, if minFreq and maxFreq are zero, the microphone supports any frequency...  
+                if (minFreq == 0 && maxFreq == 0)
+                {
+                    //...meaning 44100 Hz can be used as the recording sampling rate  
+                    maxFreq = 44100;
+                }
+
+                //Get the attached AudioSource component  
+                goAudioSource = this.GetComponent<AudioSource>();
+            }
         }
+           
     }
 
     void OnGUI()
@@ -47,6 +54,8 @@ public class MicrophoneCapture : MonoBehaviour
         //If there is a microphone  
         if (micConnected)
         {
+            canvasScript.SetActive(true);
+
             //If the audio from any microphone isn't being captured  
             if (!Microphone.IsRecording(null))
             {
@@ -70,11 +79,11 @@ public class MicrophoneCapture : MonoBehaviour
                 GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 25, 200, 50), "Recording in progress...");
             }
         }
-        else // No microphone  
+        //else // No microphone  
         {
             //Print a red "Microphone not connected!" message at the center of the screen  
-            GUI.contentColor = Color.red;
-            GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Microphone not connected!");
+            //GUI.contentColor = Color.red;
+            //GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Microphone not connected!");
         }
 
     }
