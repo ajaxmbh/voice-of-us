@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "592036837158",
+    "project_id": "voiceofus-70c3d",
+    "storage_bucket": "voiceofus-70c3d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592036837158:android:74530d9f59ca518431f3e7",
+        "android_client_info": {
+          "package_name": "com.AjaxMBH.VoiceOfUs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7DUG8Y6DWBorqKXo7QECfHsGfsG3B2IA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
