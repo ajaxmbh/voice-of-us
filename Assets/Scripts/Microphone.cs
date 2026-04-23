@@ -15,6 +15,7 @@ public class MicrophoneCapture : MonoBehaviour
     private AudioSource goAudioSource;
 
     public GameObject canvasScript;
+    public GameObject recordButton;
 
     void OnTriggerEnter(Collider micCollider)
     {
@@ -60,7 +61,7 @@ public class MicrophoneCapture : MonoBehaviour
             if (!Microphone.IsRecording(null))
             {
                 //Case the 'Record' button gets pressed  
-                if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Record"))
+                if (GUI.Button(new Rect(Screen.width / 2 - 100, 700, 200, 60), "Record"))
                 {
                     Debug.Log("Recording started");
                     //Start recording and store the audio captured from the microphone at the AudioClip in the AudioSource  
@@ -70,13 +71,13 @@ public class MicrophoneCapture : MonoBehaviour
             else //Recording is in progress  
             {
                 //Case the 'Stop and Play' button gets pressed  
-                if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Stop and Play!"))
+                if (GUI.Button(new Rect(Screen.width / 2 - 100, 700, 200, 60), "Stop and Play!"))
                 {
                     Microphone.End(null); //Stop the audio recording  
                     goAudioSource.Play(); //Playback the recorded audio  
                 }
 
-                GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 25, 200, 50), "Recording in progress...");
+                GUI.Label(new Rect(Screen.width / 2 - 100, 850, 250, 75), "Recording in progress...");
             }
         }
         //else // No microphone  
