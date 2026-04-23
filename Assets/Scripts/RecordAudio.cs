@@ -56,7 +56,8 @@ public class RecordAudio : MonoBehaviour
     {
         if (recordedClip != null)
         {
-            filePath = Path.Combine(directoryPath, filePath);
+            int fileCount = Directory.GetFiles(directoryPath, "*.wav").Length;
+            string filePath = Path.Combine(directoryPath, "recording_" + fileCount + ".wav"); 
             WavUtility.Save(filePath, recordedClip);
             Debug.Log("Recording saved as " + filePath);
         }
@@ -64,6 +65,12 @@ public class RecordAudio : MonoBehaviour
         {
             Debug.LogError("No recording found to save.");
         }
+    }
+
+    public void PlayRecording()
+    {
+        audioSource.clip = recordedClip;
+        audioSource.Play();
     }
 
     private AudioClip TrimClip(AudioClip clip, float length)
