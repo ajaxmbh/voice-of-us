@@ -7,6 +7,7 @@ public class RecordAudio : MonoBehaviour
 {
     private AudioClip recordedClip;
     [SerializeField] AudioSource audioSource;
+    public AudioSource chorus;
     private string filePath = "recording.wav";
     private string directoryPath = "Recordings";
     private float startTime;
@@ -71,6 +72,7 @@ public class RecordAudio : MonoBehaviour
     {
         audioSource.clip = recordedClip;
         audioSource.Play();
+        chorus.Play();
     }
 
     private AudioClip TrimClip(AudioClip clip, float length)
